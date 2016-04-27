@@ -1,3 +1,5 @@
+; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
+
 ;; 環境を日本語、UTF-8にする
 (set-locale-environment nil)
 (set-language-environment "Japanese")
@@ -14,11 +16,18 @@
 ;; 終了時にオートセーブファイルを削除する
 (setq delete-auto-save-files t)
 
+;; #* というバックアップファイルを作らない
+(setq auto-save-default nil)
+
+;; *.~ というバックアップファイルを作らない
+(setq make-backup-files nil)
+
+
 ;; 対応するカッコを強調表示
 (show-paren-mode t)
 
 ;; タブにスペースを使用する
-(setq-default tab-width 2 indent-tabs-mode nil)
+(setq-default tab-width 4 indent-tabs-mode nil)
 
 ;; 改行コードを表示する
 (setq eol-mnemonic-dos "(CRLF)")
@@ -67,4 +76,21 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
+;;; キーバインドの割り当て方法
+;; "C-m" に newline-and-indent を割り当てる。初期値は newline
+(define-key global-map (kbd "C-m") 'newline-and-indent)
+
+;; "M-k" でカレントバッファを閉じる。初期値は kill-sentence
+(define-key global-map (kbd "M-k") 'kill-this-buffer)
+
+;; "C-t" でウィンドウを切り替える。初期値は transpose-chars
+(define-key global-map (kbd "C-t") 'other-window)
+
+;; Mac の command + → でウィンドウを左右に分割
+(define-key global-map (kbd "s-<right>") 'split-window-horizontally)
+;; Mac の Command + ↓ でウィンドウを上下に分割
+(define-key global-map (kbd "s-<down>") 'split-window-vertically)
+;; Mac の Command + w で現在のウィンドを削除
+(define-key global-map (kbd "s-w") 'delete-window)
 
