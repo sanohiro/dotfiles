@@ -42,7 +42,10 @@
 (add-to-list 'default-frame-alist '(alpha . (0.85 0.85)))
 
 ;; ツールバーを消す
-(tool-bar-mode -1)
+(when window-system (tool-bar-mode -1))
+
+;; スクロールバーを消す
+(when window-system (scroll-bar-mode -1))
 
 ;; 列数を表示する
 (column-number-mode t)
